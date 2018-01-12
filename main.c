@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/11 21:26:56 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/11 23:49:20 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		main(int ac, char **av) //? name = filler
 		free_array(mast.map);
 	if (mast.token)
 		free_array(mast.token);
+	printf("X:(%d, %d)\n", mast.x[0], mast.x[1]);
+	printf("O:(%d, %d)\n", mast.o[0], mast.o[1]);
 	// if (mast.ln)
 	// 	free(mast.ln);
 	return (0);

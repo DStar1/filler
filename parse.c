@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:31:22 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/11 22:13:02 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/11 23:50:14 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,64 +17,81 @@
 ** the map, and the token
 */
 
-// void	map(char *line, t_mast *mast)
-// {
-	
-// 	while (mast->i < mast->mylen)
-// 	{
-// 		//mast->map[mast->i] = (char*)malloc(sizeof(char) * mast->mxlen);
-// 		mast->map[mast->i] = ft_strsub(line, 4, ft_strlen(line) - 4);
-// 		mast->i++;
-// 	}
-// 	mast->map[mast->i] = '\0';
-// }
+void	mappts(t_mast *mast)
+{
+	int x;
+	int y;
 
-void	token(t_mast *mast)
+	y = 0;
+	while (y < mast->mylen)
+	{
+		x = 0;
+		while (x < mast->mxlen)
+		{
+			if (mast->map[y][x] == 'X')
+			{
+				mast->x[0] = y;
+				mast->x[1] = x;
+			}
+			if (mast->map[y][x] == 'O')
+			{
+				mast->o[0] = y;
+				mast->o[1] = x;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	tokenpts(t_mast *mast)
 {
 	int y;
 	int x;
 	int cnt;
-	int stars;
 	
-	y = 0;
-	x = 0;
 	cnt = 1;
-	stars = 0;
+	mast->i = 0;
 	while (cnt <= 2)
 	{
-		while (mast->token[y][x])
+		y = 0;
+		while (y < mast->tylen)
 		{
-			while (mast->token[y][x])
+			x = 0;
+			while (x < mast->txlen)
 			{
-				if (cnt == 1)
-					len++;
+				if (mast->token[y][x] == '*' && cnt == 1)
+					mast->stars++;
 				else if (mast->token[y][x] == '*')
 				{
-
+					mast->tpts[mast->i] = (int*)malloc(sizeof(int) * 2);
+					mast->tpts[mast->i][0] = y;
+					mast->tpts[mast->i][1] = x;
+					printf("(%d, %d)\n", mast->tpts[mast->i][0], mast->tpts[mast->i][1]); ////////////
 				}
 				x++;
 			}
 			y++;
 		}
+		if (cnt == 1)
+			mast->tpts = (int**)malloc(sizeof(int*) * mast->stars);
 		cnt++;
 	}
 }
 
-int				f_atoi(char **line, int start)
+int		f_atoi(char **line, int start)
 {
 	int start1;
 	int nb;
 
 	nb = 0;
 	start1 = start;
-	//if (ft_isdigit('1')) {printf("%c\n", line[0][start];}
 	while (line[0][start] && ft_isdigit(line[0][start]))
 	{
 		nb += (line[0][start] - '0');
 		nb *= 10;
 		start++;
 	}
-	//if (start - start1 > 9) //check to see if it is greater than a one digit number
 	nb /= 10;
 	return (nb);
 }
@@ -118,5 +135,7 @@ void	parse(t_mast *mast)
 	}
 	close(fd);
 	free(line);
-	printf("user1: %s, user2: %s,(%d, %d), (%d, %d)\n", mast->user1, mast->user2, mast->mylen, mast->mxlen, mast->tylen, mast->txlen);
+	printf("user1: %s, user2: %s,(%d, %d), (%d, %d)\n", mast->user1, mast->user2, mast->mylen, mast->mxlen, mast->tylen, mast->txlen); ///////////////////
+	tokenpts(mast);
+	mappts(mast);
 }

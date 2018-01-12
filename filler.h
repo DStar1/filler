@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:26:25 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/11 21:48:25 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/11 23:48:45 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ typedef struct		s_mast
 	char			*filename;
 	int				x[2];
 	int				o[2];
-	char            *user;
-	void			*somthing;
+	int				stars;
+	int				**tpts;
+	char			*user;
+	void			*something;
 	struct s_mast	*next;
 }					t_mast;
 
-void	parse(t_mast *mast);
-
+void				parse(t_mast *mast);
 
 #endif
