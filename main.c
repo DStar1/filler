@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/15 20:28:07 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/15 21:12:07 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int		main(int ac, char **av) //? name = filler
 		{
 			//parse
 			//compare
+			//find closest valid place on my peices (for all points of my new token) to thier farthest point from their old stars
 			//decide what direction to place to determine if top/left(moves towards bottom/right) point
-			//find closest valid place on my peices (for all points of my new token) to thier last piece
-			//place token at ((mast->map[y - mast->token[0]][x - mast->token[1]]))
+			//place token point you want at a certain position with this math ((mast->map[y - mast->token[0]][x - mast->token[1]])) for (0, 0)
 
 			put_peice(&mast);
 		}

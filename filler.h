@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:26:25 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/15 20:13:10 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/15 21:12:14 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define FILLER_H
 
 # include "libft/libft.h"
+
+/*
+** 
+*/
 
 typedef struct		s_mast
 {
