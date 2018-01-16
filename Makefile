@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 15:20:50 by hasmith           #+#    #+#              #
-#    Updated: 2018/01/11 17:25:55 by hasmith          ###   ########.fr        #
+#    Updated: 2018/01/15 19:27:22 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = filler.a
 
 MAIN = main.c
 
-EXE = filler
+PLAYER = hasmith.filler
 
 TEST = <argv[1]>
 
@@ -36,12 +36,15 @@ $(NAME):
 	gcc -g -c $(SRC)
 	cp libft/libft.a $(NAME) 
 	ar rcs $(NAME) *.o
+	gcc -g -o $(PLAYER) $(NAME) $(MAIN)
+	make clean
 
 cmain:
 	make re
-	gcc -g -o $(EXE) $(NAME) $(MAIN)
-	make clean
-	./$(EXE)
+	cp $(PLAYER) resources/players
+	./resources/filler_vm -f resources/maps/map00 -p1 resources/players/abanlin.filler -p2 resources/players/$(PLAYER) > test.txt
+#	./resources/filler_vm -f resources/maps/map00 -p1 resources/players/abanlin.filler -p2 hasmith.filler > resources/test.txt
+#./resources/filler_vm -f resources/maps/map00 -p1 resources/
 
 clean:
 	/bin/rm -f *.o

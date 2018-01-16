@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:31:22 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/15 20:11:25 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/15 20:09:53 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,17 @@ void	parse(t_mast *mast , int i)
 			{
 				mast->map = (char**)malloc(sizeof(char*) * mast->mylen + 1);
 				mast->map2 = (char**)malloc(sizeof(char*) * mast->mylen + 1);
+				//mast->token = (char**)malloc(sizeof(char*) * mast->mylen + 1); //dont need to save whole token, just pts
 			}
 			mast->map[mast->mylen] = NULL;
+			//mast->token[mast->mylen] = NULL;
 		}
-		if ((mast->j >= 2 && mast->j < mast->mylen + 2) && i == 1) //saves map int 2 2d arrays
+		if ((mast->j >= 2 && mast->j < mast->mylen + 2) && i == 1) //saves map
 		{
 			mast->map[mast->i++] = ft_strsub(line, 4, ft_strlen(line) - 4);
 			mast->map2[mast->i++] = ft_strsub(line, 4, ft_strlen(line) - 4);
 		}
-		else if (mast->j >= 2 && mast->j < mast->mylen + 2) //copies new map to mast->map
+		else if (mast->j >= 2 && mast->j < mast->mylen + 2) //copies new map
 		{
 			ft_memcpy(line, mast->map[mast->i++]);
 			//mast->map2[mast->i++] = ft_strsub(line, 4, ft_strlen(line) - 4);
@@ -145,17 +147,18 @@ void	parse(t_mast *mast , int i)
 			mast->txlen = f_atoi(&line, 7 + ft_intlen(mast->tylen));
 			mast->i = 0;
 		}
-		if (mast->j >= mast->mylen + 3 && mast->j < mast->mylen + 3 + mast->tylen) //for the token
-		{
-			mast->token[mast->i++] = ft_strsub(line, 0, ft_strlen(line));
-		
-		}
+		// if (mast->j >= mast->mylen + 3 && mast->j < mast->mylen + 3 + mast->tylen) //for the token
+		// 	mast->token[mast->i++] = ft_strsub(line, 0, ft_strlen(line));
+
 		free(line);
 		line = NULL;
+
 		if (mast->j >= mast->mylen + mast->tylen + 2)
 			break ;
 		mast->j++;
 	}
+
+	 //close(fd);
 	free(line);
 	//printf("user1: %s, user2: %s,(%d, %d), (%d, %d)\n", mast->user1, mast->user2, mast->mylen, mast->mxlen, mast->tylen, mast->txlen); ///////////////////
 	tokenpts(mast);
