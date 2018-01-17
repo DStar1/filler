@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 20:32:37 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/15 21:12:10 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/16 20:48:39 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,16 @@ void	compare(t_mast *mast)
 		while (x < mast->mxlen)
 		{
 			if (mast->map[y][x] != mast->map2[y][x])
-				//save coodinates in a linked list
+			{
+				// //save coodinates in a linked list
+				// mast->opptok->next = (t_points*)malloc(sizeof(t_points)); //allocate space
+				// mast->opptok->pts[0] = y;
+				// mast->opptok->pts[1] = x;
+				// mast->opptok = mast->opptok->next;
+				// //printf("(%d, %d)")
+				;
+			}
+			mast->opptok = NULL;
 			x++;
 		}
 		y++;

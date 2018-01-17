@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/15 21:12:07 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/16 23:28:05 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ int		main(int ac, char **av) //? name = filler
 	ft_bzero(&mast, sizeof(mast));//sets everything to zero
 	char *place = "0 0";
 	//mast.filename = "map";//mast.filename = av[1]; //change back this when done testing
+
+	//mast.tpts = (int**)malloc(sizeof(int*) * 2);
+
 	int i = 0;
 	while (i < 3)
 	{
@@ -50,16 +53,37 @@ int		main(int ac, char **av) //? name = filler
 			//printf("p1:%c", mast.player);
 		}
 		else if (i == 1) //parse the board
+		{
+			mast.list = NULL;
+			mast.mytok = NULL;
+			mast.newlist = NULL;
+			////mast.opptok = NULL;
+			// mast.mytok = NULL;
+			// mast.mytok2 = NULL;
+			// mast.mytok = (t_points*)malloc(sizeof(t_points));
+			// mast.mytok2 = mast.mytok;
+			// //mast.opptok = (t_points*)malloc(sizeof(t_points));
 			parse(&mast, i);
+			// free(mast.mytok);
+			// mast.mytok = NULL;
+			while (mast.mytok)
+			{
+				printf("\n(%d, %d)\n", mast.mytok->pts[0], mast.mytok->pts[1]);
+				mast.mytok = mast.mytok->next;
+			}
+		}
 		if (i >= 1) //place peice
 		{
+
+			
 			//parse
 			//compare
 			//find closest valid place on my peices (for all points of my new token) to thier farthest point from their old stars
 			//decide what direction to place to determine if top/left(moves towards bottom/right) point
 			//place token point you want at a certain position with this math ((mast->map[y - mast->token[0]][x - mast->token[1]])) for (0, 0)
 
-			put_peice(&mast);
+			//put_peice(&mast);
+			;
 		}
 		i++;
 		//if (i = 3)
