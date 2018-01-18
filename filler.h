@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:26:25 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/16 23:28:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/17 21:57:45 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ typedef struct		s_mast
 	char			**map;
 	char			**map2;
 	char			**token;
+	int				tokindex;
 	int				tylen;
 	int				txlen;
 	char			*filename;
 	int				x[2];
 	int				o[2];
+	int				oppt[2];
+	int				mypt[2];
 	int				stars;
-	int				**tpts;
+	int				tpts[1000][2]; //changed from **tpts// maybe chage to tpts[100][2]
 	char			*user;
 	t_points		*opptok;
 	t_points		*mytok;
@@ -57,5 +60,8 @@ typedef struct		s_mast
 }					t_mast;
 
 void				parse(t_mast *mast, int i);
+void	compare(t_mast *mast);
+void	find_closest_pnt(t_mast *mast);
+void	place_pt(t_mast *mast);
 
 #endif

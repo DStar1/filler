@@ -6,7 +6,7 @@
 #    By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 15:20:50 by hasmith           #+#    #+#              #
-#    Updated: 2018/01/16 23:28:22 by hasmith          ###   ########.fr        #
+#    Updated: 2018/01/17 21:58:03 by hasmith          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ PLAYER = hasmith.filler
 
 TEST = <argv[1]>
 
-SRC = $(FILLER)
+SRC = $(FILLER) \
+		place.c \
+		compare.c
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -42,7 +44,7 @@ $(NAME):
 cmain:
 	make re
 	cp $(PLAYER) resources/players
-	./resources/filler_vm -f resources/maps/map00 -p1 resources/players/abanlin.filler -p2 resources/players/$(PLAYER)
+	./resources/filler_vm -f resources/maps/map00 -p1 resources/players/abanlin.filler -p2 resources/players/$(PLAYER) > tst.txt
 #	./resources/filler_vm -f resources/maps/map00 -p1 resources/players/abanlin.filler -p2 hasmith.filler > resources/test.txt
 #./resources/filler_vm -f resources/maps/map00 -p1 resources/
 

@@ -72,6 +72,8 @@ SRC = 	ft_putchar.c \
 		ft_atoi_base.c \
 		ft_power.c \
 		ft_hextoi.c \
+		ft_abs.c \
+		ft_memncpy.c \
 		ft_lstsize.c
 
 all: $(NAME)

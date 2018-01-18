@@ -1,6 +1,4 @@
-seed = 1921
-X: error on input
-resources/players/hasmith.filler: Segfault at 0
+seed = 8427
 resources/players/abanlin.filler won
 Score:
-133AGAINST0
+30AGAINST1

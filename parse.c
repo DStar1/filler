@@ -6,15 +6,20 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:31:22 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/16 23:28:09 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/17 20:33:02 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
 /*
+** GLOBAL:
 ** Parse through data to store what player you are,
 ** the map, and the token
+*/
+
+/*
+** find first 'X' and first 'O' pts and save into mast->x and mast->o
 */
 
 void	mappts(t_mast *mast)
@@ -44,64 +49,37 @@ void	mappts(t_mast *mast)
 	}
 }
 
-void	tokenpts(t_mast *mast, char **line)
+/*
+** count and store stars of my token piece int mast->tpts
+*/
+
+void	tokenpts(t_mast *mast)
 {
 	int x;
-
-
-	mast->i = 0;
+	
 	x = 0;
-	while (x < mast->txlen)
+	while (mast->ln[x])
 	{
-		// if (mast->token[y][x] == '*' && cnt == 1)
-		// 	mast->stars++;
-		// else 
-		if (*line[x] == '*')
+		if (mast->ln[x] == '*')
 		{
-			// mast->tpts[mast->i] = (int*)malloc(sizeof(int) * 2);
-			// mast->tpts[mast->i][0] = mast->mylen + 3;
-			// mast->tpts[mast->i][1] = x;
-			//printf("(%d, %d)\n", mast->tpts[mast->i][0], mast->tpts[mast->i][1]); ////////////
-			mast->newlist = (t_points*)malloc(sizeof(t_points));
-			mast->newlist->pts[0] = mast->j - (mast->mylen + 3);
-			mast->newlist->pts[1] = x;
-			mast->newlist->next = 0;
-			if (!mast->mytok)
-				mast->mytok = mast->newlist;
-			if (!mast->list)
-				mast->list = mast->newlist;
-			else
-			{
-				mast->list->next = mast->newlist;
-				mast->list = mast->newlist;
-			}
-			
-			// ////changed to liked list
-			// 	mast->mytok = (t_points*)malloc(sizeof(t_points));
-			// 	mast->mytok->pts[0] = mast->j - (mast->mylen + 3);//y;  
-			// 	mast->mytok->pts[1] = x;
-			// 	mast->mytok->next = 0;
-			// 	if (!mast->mytok2)
-			// 		mast->mytok2 = mast->mytok;
-			// 	//printf("(%d, %d)\n", mast->mytok->pts[0], mast->mytok->pts[1]);//mast->j - (mast->mylen + 3), x);//
-			// 	 //allocate space for list
-			// 	mast->mytok = mast->mytok->next;
-				
+			mast->tpts[mast->stars][0] = mast->j - (mast->mylen + 3); //possibly loses pointer, solve by changing numbers at address only
+			mast->tpts[mast->stars][1] = x;
+			mast->stars++;
 		}
 		x++;
 	}
 }
 
-int		f_atoi(char **line, int start)
+int		f_atoi(t_mast *mast, int start)
 {
 	int start1;
 	int nb;
 
 	nb = 0;
 	start1 = start;
-	while (line[0][start] && ft_isdigit(line[0][start]))
+	while (mast->ln[start] && ft_isdigit(mast->ln[start]))
 	{
-		nb += (line[0][start] - '0');
+		nb += (mast->ln[start] - '0');
 		nb *= 10;
 		start++;
 	}
@@ -109,30 +87,15 @@ int		f_atoi(char **line, int start)
 	return (nb);
 }
 
-void	cpy_map(t_mast *mast)
-{
-	int i;
-
-	i = 0;
-	while (i < mast->mylen)
-	{
-		ft_memcpy(mast->map2[i], mast->map[i], sizeof(mast->map[i]));
-		i++;
-	}
-}
-
 void	parse(t_mast *mast , int i)
 {
-	char		*line;
-
-	line = mast->ln;
-	while ((get_next_line(0, &line)))
+	while ((get_next_line(0, &mast->ln)))
 	{
 		// //EXIT(/*exit if somthing*/);
-		if (mast->j == 0) //saves map dimentions
+		if (mast->j == 0 && i == 1) 															//saves map dimentions
 		{
-			mast->mylen = f_atoi(&line, 8);
-			mast->mxlen = f_atoi(&line, 9 + ft_intlen(mast->mylen));
+			mast->mylen = f_atoi(mast, 8);
+			mast->mxlen = f_atoi(mast, 9 + ft_intlen(mast->mylen));
 			if (i == 1)
 			{
 				mast->map = (char**)malloc(sizeof(char*) * mast->mylen + 1);
@@ -141,42 +104,40 @@ void	parse(t_mast *mast , int i)
 				mast->map2[mast->mylen] = NULL;
 			}
 		}
-		if ((mast->j >= 2 && mast->j < mast->mylen + 2) && i == 1) //saves map int 2 2d arrays
+		if ((mast->j >= 2 && mast->j < mast->mylen + 2) && i == 1) 					//saves map int 2 2d arrays
 		{
-			mast->map[mast->i] = ft_strsub(line, 4, ft_strlen(line) - 4);
-			mast->map2[mast->i] = ft_strsub(line, 4, ft_strlen(line) - 4);
+			mast->map[mast->i] = ft_strsub(mast->ln, 4, ft_strlen(mast->ln) - 4);
+			mast->map2[mast->i] = ft_strsub(mast->ln, 4, ft_strlen(mast->ln) - 4);
 			mast->i++;
 		}
-		else if (mast->j >= 2 && mast->j < mast->mylen + 2) //copies new map to mast->map
+		else if (mast->j >= 2 && mast->j < mast->mylen + 2)						//copies new map(mast->map2) to mast->map
 		{
-			ft_memcpy(mast->map[mast->i++], line, sizeof(line));
-			//mast->map2[mast->i++] = ft_strsub(line, 4, ft_strlen(line) - 4);
+			//char *newln = ft_strsub(mast->ln, 4, ft_strlen(mast->ln) - 4);
+			//printf("%s\n", newln);
+			//ft_putchar('\n');
+			int q = 0;
+			for (int w = 4; mast->ln[w]; w++)
+				mast->map[mast->i][q++] = mast->ln[w];
+			//ft_memcpy(mast->map[mast->i], newln, sizeof(newln));//ft_memncpy(mast->map[mast->i++], mast->ln, 4, sizeof(mast->ln) - 4);
+			mast->i++;
+			//free(newln);
 		}
-		if (mast->mylen && mast->j == mast->mylen + 2) //saves token dimentions
+		if (mast->mylen && mast->j == mast->mylen + 2) 								//saves token dimentions
 		{
-			mast->tylen = f_atoi(&line, 6);
-			mast->txlen = f_atoi(&line, 7 + ft_intlen(mast->tylen));
+			mast->tylen = f_atoi(mast, 6);
+			mast->txlen = f_atoi(mast, 7 + ft_intlen(mast->tylen));
 			mast->i = 0;
 		}
-		if (mast->j >= mast->mylen + 3 && mast->j < mast->mylen + 3 + mast->tylen) //for the token
-		{
-			tokenpts(mast, &line);
-									//mast->token[mast->i++] = ft_strsub(line, 0, ft_strlen(line));
-									//printf("%d\n", mast->j - (mast->mylen + 3));
-		}
-		if (mast->j == mast->mylen + 3 + mast->tylen) //for linked list
-		{
-			free(mast->mytok);
-			mast->mytok = NULL;
-		}
-		free(line);
-		line = NULL;
+		if (mast->j >= mast->mylen + 3 && mast->j < mast->mylen + 3 + mast->tylen) //for the token points
+			tokenpts(mast);
+		free(mast->ln);
+		mast->ln = NULL;
 		if (mast->j >= mast->mylen + mast->tylen + 2)
 			break ;
 		mast->j++;
 	}
-	free(line);
-	printf("player: %c,(%d, %d), (%d, %d)\n", mast->player, mast->mylen, mast->mxlen, mast->tylen, mast->txlen); ///////////////////
-
-	mappts(mast);
+	free(mast->ln);
+	//printf("player: %c,(%d, %d), (%d, %d)\n", mast->player, mast->mylen, mast->mxlen, mast->tylen, mast->txlen); ///////////////////
+	if (i == 1)
+		mappts(mast);
 }
