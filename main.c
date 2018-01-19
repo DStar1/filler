@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/17 21:57:22 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/18 21:39:29 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,10 @@
 
 void	put_peice(t_mast *mast)
 {
-		if (mast->player == 'O')
-		{
-			ft_putnbr(mast->o[0]);// + '0');
-			ft_putchar(' ');
-			ft_putnbr(mast->o[1]);// + '0');
-		}
-		else if (mast->player == 'X')
-		{
-			ft_putnbr(mast->x[0]);// + '0');
-			ft_putchar(' ');
-			ft_putnbr(mast->x[1]);// + '0');
-		}
-		ft_putchar('\n');
+	ft_putnbr(mast->mypt[0]);
+	ft_putchar(' ');
+	ft_putnbr(mast->mypt[1]);
+	ft_putchar('\n');
 }
 
 void	cpy_map(t_mast *mast)
@@ -86,6 +77,7 @@ void	set_me_opp(t_mast *mast)
 			mast->mypt[0] = mast->x[0];
 			mast->mypt[1] = mast->x[1];
 		}
+		mast->stars = 1;
 }
 
 int		main(int ac, char **av) //? name = filler
@@ -103,6 +95,7 @@ int		main(int ac, char **av) //? name = filler
 	{
 		mast.j = 0;
 		//mast.i = 0;
+		mast.stars = 0;
 		if (i == 0) //find what player you are
 		{
 			get_next_line(0, &mast.ln);
@@ -110,6 +103,7 @@ int		main(int ac, char **av) //? name = filler
 				mast.player = 'O';
 			else if (mast.ln[10] == '2')
 				mast.player = 'X';
+			free(mast.ln);
 			//printf("p1:%c", mast.player);
 		}
 		// else if (i == 1) //parse the board
@@ -121,36 +115,47 @@ int		main(int ac, char **av) //? name = filler
 		// 	// 	printf("\n(%d, %d)\n", mast.tpts[p][0], mast.tpts[p][1]);
 		// 	// }
 		// }
-		if (i == 1)// (i >= 1) //place peice
-		{
-			parse(&mast, i);
-					// printf("X:(%d, %d)\n", mast.x[0], mast.x[1]);
-					// printf("O:(%d, %d)\n", mast.o[0], mast.o[1]);
-			set_me_opp(&mast);
-			put_peice(&mast);
-			////check_opp(&mast);
-			
-			//parse
-			//compare
-			//find closest valid place on my peices (for all points of my new token) to thier farthest point from their old stars
-			//decide what direction to place to determine if top/left(moves towards bottom/right) point
-			//place token point you want at a certain position with this math ((mast->map[y - mast->token[0]][x - mast->token[1]])) for (0, 0)
+		
+		// if (i == 1)// (i >= 1) //place peice
+		// {
+		// 	parse(&mast, i);
+		// 			// printf("X:(%d, %d)\n", mast.x[0], mast.x[1]);
+		// 			// printf("O:(%d, %d)\n", mast.o[0], mast.o[1]);
+		// 	set_me_opp(&mast);
+		// 	place_pt(&mast);//reorder the token points based on direction to start with
+		// 	compare(&mast);
+		// 	find_closest_pnt(&mast);
 
-			//put_peice(&mast);
-			;
-		}
-		if (i >= 2 && i <= 4)// (i >= 1) //place peice
+
+		// 	put_peice(&mast);
+		// 	////check_opp(&mast);
+			
+		// 	//parse
+		// 	//compare
+		// 	//find closest valid place on my peices (for all points of my new token) to thier farthest point from their old stars
+		// 	//decide what direction to place to determine if top/left(moves towards bottom/right) point
+		// 	//place token point you want at a certain position with this math ((mast->map[y - mast->token[0]][x - mast->token[1]])) for (0, 0)
+
+		// 	//put_peice(&mast);
+		// 	;
+		// }
+		if (i >= 1 && i <= 4)// (i >= 1) //place peice
 		{
 			parse(&mast, i);
-			ft_putarr(mast.map2);
-			ft_putchar('\n');
-			ft_putarr(mast.map);
+			if (i == 1)
+				set_me_opp(&mast);
+
+			place_pt(&mast);//reorder the token points based on direction to start with
+						//printf("me:(%d, %d)\n", mast.mypt[0], mast.mypt[1]);
+						// printf("stars:%d\n", mast.stars);
 			compare(&mast);
-			place_pt(&mast);//find the point on token to start with
 			find_closest_pnt(&mast);
-			printf("opp:(%d, %d)\n", mast.oppt[0], mast.oppt[1]);
-			printf("me:(%d, %d)\n", mast.mypt[0], mast.mypt[1]);
-			printf("Player: %c, map: (%d, %d), Token: (%d, %d)\n", mast.player, mast.mylen, mast.mxlen, mast.tylen, mast.txlen); ///////////////////
+
+			put_peice(&mast);
+			
+			// printf("opp:(%d, %d)\n", mast.oppt[0], mast.oppt[1]);
+			// printf("me:(%d, %d)\n", mast.mypt[0], mast.mypt[1]);
+			// printf("Player: %c, map: (%d, %d), Token: (%d, %d)\n", mast.player, mast.mylen, mast.mxlen, mast.tylen, mast.txlen); ///////////////////
 			cpy_map(&mast);
 		}
 		i++;

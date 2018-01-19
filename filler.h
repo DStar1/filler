@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:26:25 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/17 21:57:45 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/18 18:16:00 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ typedef struct		s_mast
 	int				o[2];
 	int				oppt[2];
 	int				mypt[2];
+	int				errorcnt;
+	int				pcnt; //player points cnt
 	int				stars;
 	int				tpts[1000][2]; //changed from **tpts// maybe chage to tpts[100][2]
+	int				tpts_ord[1000][2]; //token points reordered based on where to place them
+	int				tpt[2];
 	char			*user;
 	t_points		*opptok;
 	t_points		*mytok;

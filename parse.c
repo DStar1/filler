@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:31:22 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/17 20:33:02 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/18 21:03:55 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	tokenpts(t_mast *mast)
 		{
 			mast->tpts[mast->stars][0] = mast->j - (mast->mylen + 3); //possibly loses pointer, solve by changing numbers at address only
 			mast->tpts[mast->stars][1] = x;
+			//mast->stars++;
+			//for the newly ordered token
+			// mast->tpts_ord[mast->stars][0] = mast->j - (mast->mylen + 3); //possibly loses pointer, solve by changing numbers at address only
+			// mast->tpts_ord[mast->stars][1] = x;
+			//printf("stars:%d\n", mast->stars);
 			mast->stars++;
 		}
 		x++;
