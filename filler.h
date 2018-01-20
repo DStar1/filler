@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:26:25 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/18 18:16:00 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/20 01:12:23 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_mast
 	char			*ln;
 	char			*place;
 	char			player;
+	char			opponent;
 	char			*user1;
 	char			*user2;
 	int				mylen;
@@ -48,6 +49,7 @@ typedef struct		s_mast
 	int				o[2];
 	int				oppt[2];
 	int				mypt[2];
+	int				startpt[2];
 	int				errorcnt;
 	int				pcnt; //player points cnt
 	int				stars;
@@ -66,6 +68,7 @@ typedef struct		s_mast
 void				parse(t_mast *mast, int i);
 void	compare(t_mast *mast);
 void	find_closest_pnt(t_mast *mast);
-void	place_pt(t_mast *mast);
+int		place_pt(t_mast *mast);
+void	put_peice(t_mast *mast);
 
 #endif

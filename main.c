@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/19 16:45:30 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/20 01:12:27 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	put_peice(t_mast *mast)
 {
-	ft_putnbr(mast->mypt[0]);
+	ft_putnbr(mast->startpt[0]);
 	ft_putchar(' ');
-	ft_putnbr(mast->mypt[1]);
+	ft_putnbr(mast->startpt[1]);
 	ft_putchar('\n');
 }
 
@@ -100,9 +100,15 @@ int		main(int ac, char **av) //? name = filler
 		{
 			get_next_line(0, &mast.ln);
 			if (mast.ln[10] == '1')
+			{
 				mast.player = 'O';
+				mast.opponent = 'X';
+			}
 			else if (mast.ln[10] == '2')
+			{
 				mast.player = 'X';
+				mast.opponent = 'O';
+			}
 			free(mast.ln);
 			//printf("p1:%c", mast.player);
 		}
@@ -142,16 +148,17 @@ int		main(int ac, char **av) //? name = filler
 		if (i >= 1)// && i <= 4)// (i >= 1) //place peice
 		{
 			parse(&mast, i);
-			// if (i == 1)
-			// 	set_me_opp(&mast);
+			if (i == 1)
+				set_me_opp(&mast);
 
-			place_pt(&mast);//reorder the token points based on direction to start with
-						//printf("me:(%d, %d)\n", mast.mypt[0], mast.mypt[1]);
-						// printf("stars:%d\n", mast.stars);
+			
 			// for (int e = 0; e < mast.stars; e++)
 			// 	printf("valid? (%d, %d)\n", mast.tpts[e][0], mast.tpts[e][1]);
 			compare(&mast);
-			find_closest_pnt(&mast);
+			place_pt(&mast);//reorder the token points based on direction to start with
+						//printf("me:(%d, %d)\n", mast.mypt[0], mast.mypt[1]);
+						// printf("stars:%d\n", mast.stars);
+			//find_closest_pnt(&mast);
 
 			put_peice(&mast);
 			
