@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/18 21:39:29 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/19 16:45:30 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		main(int ac, char **av) //? name = filler
 	//mast.tpts = (int**)malloc(sizeof(int*) * 2);
 
 	int i = 0;
-	while (i < 5)
+	while (1)//i < 5)
 	{
 		mast.j = 0;
 		//mast.i = 0;
@@ -139,15 +139,17 @@ int		main(int ac, char **av) //? name = filler
 		// 	//put_peice(&mast);
 		// 	;
 		// }
-		if (i >= 1 && i <= 4)// (i >= 1) //place peice
+		if (i >= 1)// && i <= 4)// (i >= 1) //place peice
 		{
 			parse(&mast, i);
-			if (i == 1)
-				set_me_opp(&mast);
+			// if (i == 1)
+			// 	set_me_opp(&mast);
 
 			place_pt(&mast);//reorder the token points based on direction to start with
 						//printf("me:(%d, %d)\n", mast.mypt[0], mast.mypt[1]);
 						// printf("stars:%d\n", mast.stars);
+			// for (int e = 0; e < mast.stars; e++)
+			// 	printf("valid? (%d, %d)\n", mast.tpts[e][0], mast.tpts[e][1]);
 			compare(&mast);
 			find_closest_pnt(&mast);
 
