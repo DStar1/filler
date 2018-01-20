@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 20:32:37 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/19 16:37:37 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/19 16:50:31 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	find_closest_pnt(t_mast *mast)
 		{
 			if (mast->map[y][x] == mast->player)
 			{
+				//maybe save this\/ point and work up from there for down right, down from there for up left and so on
 				// if (ft_abs(y - mast->oppt[0]) < ft_abs(mast->mypt[0] - mast->oppt[0]) && ft_abs(x - mast->oppt[1]) < ft_abs(mast->mypt[1] - mast->oppt[1]))///*absolute values of (y - oppt[0] < mypt[0] - oppt[0]) && absolute values of (x - oppt[1] < mypt[1] - oppt[1]))*/)
 				// {
 					// if (mast->errorcnt == mast->pcnt)
