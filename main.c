@@ -6,12 +6,13 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/20 21:14:53 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/21 02:01:15 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** beats carli half the time when I'm player 2
+** ablian 50/50 me player 1
 */
 
 #include "filler.h"
