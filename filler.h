@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:26:25 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/20 01:12:23 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/20 17:55:49 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_points
 
 typedef struct		s_mast
 {
+	int				fd;
 	int				i;
 	int				j;
 	char			*ln;

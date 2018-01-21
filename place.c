@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 21:03:09 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/20 01:21:20 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/20 20:57:10 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,50 @@ int		check_valid(t_mast *mast, int y, int x, int index)
 	int i;
 	int y1;
 	int x1;
+	int plcnt;
 
 	i = 0;
 	ret = 0;
-	mast->tokindex = 0;
+	plcnt = 0;
 	y1 = y - (mast->tpts[index][0]); //was mast->tpts[i][0]
 	x1 = x - (mast->tpts[index][1]); //was mast->tpts[i][0]
+	
+	// if ((y1 >= mast->mylen || x1 >= mast->mxlen))
+	// 	return (0);
 	while (i < mast->stars)
 	{
+		//printf("index: %d (%d,%d)\n", i, y1 , x1);
 		// y1 = (y + mast->tpts[i][0]);//mast->tpts[i][0] - mast->tylen + y + 1;//
 		// x1 = (x + mast->tpts[i][1]);//mast->tpts[i][1] - mast->txlen + x + 1;//
 		//printf("valid? y, x(%d, %d), token(%d, %d), new(%d, %d)\n",y, x, mast->tpts[i][0], mast->tpts[i][1], mast->tpts[i][0] + y1, mast->tpts[i][1] + x1);
-		if (y1 < mast->mylen && x1 < mast->mxlen)
+		if (((mast->tpts[i][0] + y1) >= 0 && (mast->tpts[i][0] + y1) < mast->mylen)
+					&& ((mast->tpts[i][1] + x1) >= 0 && (mast->tpts[i][1] + x1) < mast->mxlen))
 		{
 			if (mast->map[mast->tpts[i][0] + y1][mast->tpts[i][1] + x1] == '.')
 			{
 				// mast->tpt[0] = y1;
 				// mast->tpt[1] = x1;
-				ret++;
+					ret++;
 			}
 			else if (mast->map[mast->tpts[i][0] + y1][mast->tpts[i][1] + x1] == mast->player)
 			{
-				mast->tokindex = i;//save index if it equals mast->player?
+				plcnt++;//save index if it equals mast->player?
 			}
+			else
+				return (0);
 		}
-		// else
-		// 	return (0);
+		else
+			return (0);
 		i++;
 	}
-	if (ret == mast->stars - 1)
+	if (ret == mast->stars - 1 && plcnt == 1)
 	{
 		//printf("\ntrue token(%d, %d)\n", y1 - mast->tpts[0][0], x1 - mast->tpts[0][1]);
 		mast->startpt[0] = y - (mast->tpts[index][0]);// - (mast->tylen - 1));
 		mast->startpt[1] = x - (mast->tpts[index][1]);// - (mast->txlen - 1));
+		return (1);
 	}
-	return (ret);
+	return (0);
 }
 
 /*
@@ -74,15 +83,24 @@ int	token_last(t_mast *mast, int y, int x, int last)
 	iter = 1;
 	if (last == 1)
 	{
-		index = mast->stars;
-		iter = -1;
+		index = mast->stars - 1;
+		while (index >= 0) //go throught tokens points
+		{
+			// printf("(%d,%d)\n", y , x);
+			if (check_valid(mast, y, x, index) == 1)
+				return (1);
+			index--;
+		}
 	}
-	while (index >= 0) //go throught tokens points
+	else
 	{
-		if (check_valid(mast, y, x, index) == mast->stars - 1)
-			return (1);
-		else
-			index += iter;
+		while (index < mast->stars)
+		{
+			// printf("(%d,%d)\n", y , x);
+			if (check_valid(mast, y, x, index) == 1)
+				return (1);
+			index++;
+		}
 	}
 	return (0);
 }
@@ -105,7 +123,7 @@ void	tpoint_dir(t_mast *mast)
 ** ((mast->map[y - mast->token[0]][x - mast->token[1]])) for (0, 0)
 */
 
-int	place_up_r(t_mast *mast) //not complete
+int	place_down_l(t_mast *mast) //!!!!maybe change to up left because it starts at x = 0
 {
 	//highest y point, with the lowest x
 	// int index;
@@ -121,6 +139,7 @@ int	place_up_r(t_mast *mast) //not complete
 		x = 0;
 		while (x < mast->mxlen)
 		{
+			//	printf("(%d,%d)\n", y , x);
 			if (mast->map[y][x] == mast->player)
 			{
 				if (token_last(mast, y, x, 1) == 1)
@@ -182,6 +201,7 @@ int	place_up_l(t_mast *mast) //checks down and to the right
 	int x;
  //starts at bootom coordinate of token mast->tpts[index][]
 	//first try to place the point based on mast->mypt, then do the loops
+	
 	if (token_last(mast, mast->mypt[0], mast->mypt[1], 1) == 1)
 		return (1);
 	y = 0;
@@ -192,6 +212,7 @@ int	place_up_l(t_mast *mast) //checks down and to the right
 		{
 			if (mast->map[y][x] == mast->player)
 			{
+				// printf("(%d,%d)\n", y , x);
 				if (token_last(mast, y, x, 1) == 1)
 					return (1);
 			}
@@ -202,7 +223,7 @@ int	place_up_l(t_mast *mast) //checks down and to the right
 	return (0);
 }
 
-int		place_down_l(t_mast *mast) //not complete
+int		place_up_r(t_mast *mast) //should be up_r
 {
 	//lowest y point, with the highest x
 	int y;
@@ -219,8 +240,10 @@ int		place_down_l(t_mast *mast) //not complete
 		x = mast->mxlen - 1;
 		while (x >= 0)
 		{
+								// printf("(%d,%d)\n", y , x);
 			if (mast->map[y][x] == mast->player)
 			{
+
 				if (token_last(mast, y, x, 0) == 1)
 					return (1);
 			}

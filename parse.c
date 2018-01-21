@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:31:22 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/20 01:15:17 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/20 21:07:43 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,10 @@ int		f_atoi(t_mast *mast, int start)
 
 void	parse(t_mast *mast , int i)
 {
-	while ((get_next_line(0, &mast->ln)))
+	while ((get_next_line(mast->fd, &mast->ln)))//while ((get_next_line(0, &mast->ln)))
 	{
 		// //EXIT(/*exit if somthing*/);
+//		printf("ln = %s\n", mast->ln);
 		if (mast->j == 0 && i == 1) 															//saves map dimentions
 		{
 			mast->mylen = f_atoi(mast, 8);
