@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:28:21 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/21 22:48:09 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/21 22:15:11 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 ** ablian 50/50 me player 1
 */
 
-#include "srcs/filler.h"
+#include "filler.h"
 
 void	put_peice(t_mast *mast)
 {
@@ -104,7 +104,11 @@ int		main(int ac, char **av)
 	mast.fd = 0;
 //	mast.fd = open("testmap1.1.txt", O_RDONLY);/////get rid of when reading from stdin
 	i = 0;
-	//while (i <= 18)//while (1)//i < 5)
+
+		mast.mlx = mlx_init();
+		mast.win = mlx_new_window(m.mlx, m.wsize, m.wsize, av[1]);
+
+	//while (i <= 18)//while (1)//i < 5)	
 	while (1)
 	{
 		mast.j = 0;
@@ -138,8 +142,6 @@ int		main(int ac, char **av)
 	//printf("Player: %c, map: (%d, %d), Token: (%d, %d)\n", mast.player, mast.mylen, mast.mxlen, mast.tylen, mast.txlen); ///////////////////
 	if (mast.map)
 		free_array(mast.map);
-	// while (1)
-	// 	;
 //	close(mast.fd);//get rid of when reading from stdin
 	return (0);
 }
