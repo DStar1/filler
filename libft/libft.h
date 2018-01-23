@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 16:56:52 by hasmith           #+#    #+#             */
-/*   Updated: 2018/01/18 18:36:36 by hasmith          ###   ########.fr       */
+/*   Updated: 2018/01/22 22:26:25 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,11 @@ int					ft_power(int nb, int power);
 int					ft_atoi_base(char *nb, int base);
 char				*ft_itoa_base(int value, int base);
 size_t				ft_abs(int n);
-void				*ft_memncpy(void *s1, const void *s2, size_t start, size_t n);
+void				*ft_memncpy(
+						void *s1,
+						const void *s2,
+						size_t start,
+						size_t n);
 void				ft_swap(int *a, int *b);
 
 #endif

@@ -1,9 +1,0 @@
-# -------------- VM  version 1.1 ------------- #
-#                                              #
-# 42 / filler VM Developped by: Hcao - Abanlin #
-#                                              #
-# -------------------------------------------- #
-launched resources/players/abanlin.filler
-$$$ exec p1 : [resources/players/abanlin.filler]
-error:
-bad player
