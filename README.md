@@ -20,7 +20,7 @@ On each turn, the current player have to put his piece on the map, and try to bo
 
 The game appears on the standard input.
 
-The aim of the game is to put more pieces on the map than the ennemy.
+The aim of the game is to put more pieces on the map than the enemy.
 
 # Usage
 
