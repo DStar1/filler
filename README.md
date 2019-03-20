@@ -3,6 +3,8 @@ VM and player algorithm for competition. Each player tries to fill most space us
 
 42 graph tracing/pathfinding project with graphical interface.
 
+![](filler_med_gif.gif)
+
 ## Table of contents
 
 - [Subject](#subject)
